@@ -1,0 +1,39 @@
+<h3 class="mt-2">Search</h3>
+<form method="GET">
+    <div>
+        <label>Food Name</label>
+        <input type="text" value="<%= searchParams.foodName %>" name="foodName" class="form-control" />
+    </div>
+
+    <div>
+        <label>Date</label>
+        <div class="input-group">
+            <select name="date_operator" class="form-control" value="">
+                <option value="on" <%= searchParams.date_operator === "on" ? "selected" : "" %>>On</option>
+                <option value="after" <%= searchParams.date_operator === "after" ? "selected" : "" %>>After</option>
+                <option value="before" <%= searchParams.date_operator === "before" ? "selected" : "" %>>Before</option>
+            </select>
+            <input type="date" class="form-control" name="date" value="<%=searchParams.date %>" />
+        </div>
+    </div>
+
+    <div>
+        <label>Tags</label>
+        <% for (let t of tags) { %>
+            <div>
+                <input type="checkbox" name="tags" 
+                       value="<%= t.id %>" 
+                       <%= searchParams.tags.includes(t.id.toString()) ? "checked" : "" %>
+
+                       />
+                <label>
+                    <%= t.name %>
+                </label>
+            </div>
+
+
+            <% } %>
+    </div>
+
+    <input type="submit" value="Search" class="btn btn-primary btn-sm mt-1 mb-1" />
+</form>
